@@ -47,13 +47,13 @@ object Quad {
   case class HigherQuad(quadLeftUp: Quad, quadRightUp: Quad, quadLeftDown: Quad, quadRightDown: Quad) {
     def centerSumIsValid: Boolean =
       if (List(quadLeftUp, quadRightUp, quadLeftDown, quadRightDown).exists(_.isEmpty))
-        quadLeftUp.rightDown + quadRightUp.leftDown + quadLeftDown.rightUp + quadRightDown.leftUp < 10
+        quadLeftUp.rightDown + quadRightUp.leftDown + quadLeftDown.rightUp + quadRightDown.leftUp <= 10
       else
         quadLeftUp.rightDown + quadRightUp.leftDown + quadLeftDown.rightUp + quadRightDown.leftUp == 10
 
     def prettyString: String = {
-      val leftString = quadLeftUp + "\n" + quadLeftDown
-      val rightString = quadRightUp + "\n" + quadRightDown
+      val leftString = quadLeftUp.prettyString + "\n" + quadLeftDown.prettyString
+      val rightString = quadRightUp.prettyString + "\n" + quadRightDown.prettyString
       leftString.split('\n').zip(rightString.split('\n')).map(x => x._1 + x._2).mkString("\n")
     }
   }
